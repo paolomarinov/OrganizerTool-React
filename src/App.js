@@ -1,26 +1,47 @@
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import CalendarView from './components/calendarComponent';
 import { InputZone } from './components/inputForm';
+import moment from 'moment';
 
-function App() {
+const App = () => {
+  const [events, setEvents] = useState([]);
+
+  useEffect(() => {
+    updateEvents();
+  }, []);
+
+  const updateEvents = () => {
+    const newEvents = [];
+
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (key.startsWith("eventObj_")) {
+        const evt = JSON.parse(localStorage.getItem(key));
+        // evt.title = moment(evt.title)
+
+        // evt.start = moment(evt.start).toDate();
+        // evt.end = moment(evt.end).toDate();
+        newEvents.push(evt);
+      }
+    }
+
+    setEvents(newEvents);
+  };
+
   return (
     <div className="App">
       <div className='app-container'>
-
-        <InputZone />
-
+        <InputZone events={events} onEventAdded={updateEvents} />
         <div className='calendar-container'>
-          <CalendarView />
-
+          <CalendarView events={events} />
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default App;
-
 //step one: 
 //plan out the UI where the software would work:
 
