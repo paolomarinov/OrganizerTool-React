@@ -14,25 +14,37 @@ export function InputZone(props){
 
 
     function handleSubmit(e){
-      //e.preventDefault();
+      e.preventDefault()
+
+
+      const timezone = "America/New_York";
+      const dateInTimezone = new Date(followupDate).toLocaleString("en-US", {
+        timeZone: timezone,
+      });
+
+      // let dateObj = new Date(new Date(followupDate).toISOString().substring(0, 10));
+
+      let dateObj = new Date(`${followupDate}T${callbackTime}`)
+      let endDateObj = new Date(`${followupDate}T${callbackTime}`)
+      endDateObj.setMinutes(endDateObj.getMinutes() + 15);
+
+      // const dateAndTime = `${followupDate}T${callbackTime}:00`;
+      // let dateObj = new Date(dateAndTime);
+      // let endDateObj = new Date(dateAndTime);
+      // endDateObj.setMinutes(endDateObj.getMinutes() + 15);
+
       
-      // const formData = {
-      //   schoolName,
-      //   director,
-      //   phoneNumber,
-      //   email, 
-      //   followupDate,
-      //   callbackTime,
-      //   priorityGroup,
-      //   accountType
-      // }
+      // let dateObj = new Date(followupDate);
+      // dateObj.setMinutes(dateObj.getMinutes() - dateObj.getTimezoneOffset());
 
-      let dateObj = new Date (new Date(followupDate).toISOString().substring(0, 10));
-      const [hours, minutes] = callbackTime.split(":").map(Number)
-      dateObj.setHours(hours, minutes)
+      // const [hours, minutes] = callbackTime.split(":").map(Number)
+      // dateObj.setHours(hours, minutes)
 
-      let endDateObj = new Date(new Date(followupDate).toISOString().substring(0, 10));
-      endDateObj.setHours(hours, (minutes + 15))
+      // // let endDateObj = new Date(new Date(followupDate).toISOString().substring(0, 10));
+      
+      // let endDateObj = new Date(followupDate);
+      // endDateObj.setMinutes(dateObj.getMinutes() - dateObj.getTimezoneOffset());
+      // endDateObj.setHours(hours, (minutes + 15))
         //   //Event object example
 
     const eventObj = {

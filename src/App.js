@@ -18,10 +18,8 @@ const App = () => {
       const key = localStorage.key(i);
       if (key.startsWith("eventObj_")) {
         const evt = JSON.parse(localStorage.getItem(key));
-        // evt.title = moment(evt.title)
-
-        // evt.start = moment(evt.start).toDate();
-        // evt.end = moment(evt.end).toDate();
+        evt.start = moment(evt.start).toDate();
+        evt.end = moment(evt.end).toDate();
         newEvents.push(evt);
       }
     }
