@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 
-export function InputZone(){
+export function InputZone(props){
   const [schoolName, setSchoolName] = useState('');
   const [director, setDirector] = useState('')
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -14,36 +14,30 @@ export function InputZone(){
 
 
     function handleSubmit(e){
-      e.preventDefault();
-      
-      const formData = {
-        schoolName,
-        director,
-        phoneNumber,
-        email, 
-        followupDate,
-        callbackTime,
-        priorityGroup,
-        accountType
-      }
+      e.preventDefault()
 
-      let dateObj = new Date(formData.followupDate)
-      const [hours, minutes] = formData.callbackTime.split(":").map(Number)
-      dateObj.setHours(hours, minutes)
 
-      let endDateObj = new Date(formData.followupDate)
-      endDateObj.setHours(hours, (minutes + 15))
-        //   //Event object example
+      const timezone = "America/New_York";
+      const dateInTimezone = new Date(followupDate).toLocaleString("en-US", {
+        timeZone: timezone,
+      });
+
+      let dateObj = new Date(`${followupDate}T${callbackTime}`)
+      let endDateObj = new Date(`${followupDate}T${callbackTime}`)
+      endDateObj.setMinutes(endDateObj.getMinutes() + 15);
+
 
     const eventObj = {
-      title: formData.schoolName,
+      title: schoolName,
       start: dateObj,
       end: endDateObj
     }
 
-      console.log(eventObj)
+      
+
       const uniqueId = new Date().getTime();
-      localStorage.setItem(`formData_${uniqueId}`, JSON.stringify(eventObj));
+      localStorage.setItem(`eventObj_${uniqueId}`, JSON.stringify(eventObj));
+props.onEventAdded();
     }
 
     return (
@@ -73,7 +67,7 @@ export function InputZone(){
         <label htmlFor="followup-date">
           Followup Date
           </label>
-          <input type="date" id="followup-date" value={followupDate} onChange={(e) =>setFollowupDate(e.target.value)}/>
+          <input type="date" id="followup-date" value={followupDate} onChange={(e) =>{console.log(e.target.value); setFollowupDate(e.target.value)}}/>
           <br />
         <label htmlFor="callback-time">
           Callback Time
