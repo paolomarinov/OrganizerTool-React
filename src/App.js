@@ -5,6 +5,7 @@ import { InputZone } from './components/inputForm';
 import moment from 'moment';
 
 const App = () => {
+  let nothing;
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
