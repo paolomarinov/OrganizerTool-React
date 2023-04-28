@@ -46,3 +46,7 @@
 .input form{
   width: 10%;
 }
+
+.calendar-container{
+  height: 1500px;
+}

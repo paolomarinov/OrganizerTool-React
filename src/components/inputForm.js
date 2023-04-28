@@ -9,8 +9,9 @@ export function InputZone(props){
   const [followup, setFollowup] = useState('');
   const [followupDate, setFollowupDate] = useState('')
   const [callbackTime, setCallbackTime] = useState('');
-  const [priorityGroup, setPriorityGroup] = useState('')
+  const [notes, setNotes] = useState('')
   const [accountType, setAccountType] = useState('')
+  // const [eventToHandle, setEventToHandle] = useState(null)
 
 
     function handleSubmit(e){
@@ -26,16 +27,24 @@ export function InputZone(props){
       let endDateObj = new Date(`${followupDate}T${callbackTime}`)
       endDateObj.setMinutes(endDateObj.getMinutes() + 15);
 
-
+      const uniqueId = new Date().getTime();
+      
     const eventObj = {
+      uniqueId: uniqueId,
       title: schoolName,
       start: dateObj,
-      end: endDateObj
+      end: endDateObj,
+      formData: {
+        schoolName,
+        director,
+        phoneNumber,
+        followupDate,
+        callbackTime,
+        notes,
+        accountType
+      }      
     }
 
-      
-
-      const uniqueId = new Date().getTime();
       localStorage.setItem(`eventObj_${uniqueId}`, JSON.stringify(eventObj));
 props.onEventAdded();
     }
@@ -70,14 +79,14 @@ props.onEventAdded();
           <input type="date" id="followup-date" value={followupDate} onChange={(e) =>{console.log(e.target.value); setFollowupDate(e.target.value)}}/>
           <br />
         <label htmlFor="callback-time">
-          Callback Time
+          Time
           </label>
           <input type="time" id="callback-time" value={callbackTime} onChange={(e) =>setCallbackTime(e.target.value)}/>
-
-        <label htmlFor="priority-group">
-          Priority Group
+          <br/>
+        <label htmlFor="notes">
+          notes
           </label>
-          <input type="text" id="priority-group" value={priorityGroup} onChange={(e) =>setPriorityGroup(e.target.value)}/>
+          <textarea type="text" id="notes" value={notes} onChange={(e) =>setNotes(e.target.value)}/>
 
         <label htmlFor="account-type">
           Account Type  
