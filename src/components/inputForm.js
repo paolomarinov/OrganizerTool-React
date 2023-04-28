@@ -38,6 +38,7 @@ export function InputZone(props){
         schoolName,
         director,
         phoneNumber,
+        email,
         followupDate,
         callbackTime,
         notes,

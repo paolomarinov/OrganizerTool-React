@@ -12,9 +12,9 @@ export function EventDetailsModal(props){
     return (
         <Modal isOpen={props.isOpen} onRequestClose={props.onClose}>
             <h1>{props.event.formData.schoolName}</h1>
-            <p>{props.event.formData.notes}</p>
-            <p>{props.event.formData.phoneNumber}</p>
-            <p>{props.event.uniqueId}</p>
+            <p>Notes: {props.event.formData.notes}</p>
+            <p>Phone number: {props.event.formData.phoneNumber}</p>
+            <p>Email: {props.event.formData.email}</p>
             <button onClick={props.onClose}>Close</button>
         </Modal>
     )
