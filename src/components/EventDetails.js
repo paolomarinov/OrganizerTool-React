@@ -15,6 +15,8 @@ export function EventDetailsModal(props){
             <p>Notes: {props.event.formData.notes}</p>
             <p>Phone number: {props.event.formData.phoneNumber}</p>
             <p>Email: {props.event.formData.email}</p>
+            <button onClick={()=>{props.deleteEvent(props.event.uniqueId)}}>Delete</button>
+            {/* <button onClick={()=>{props.onDone(props.event)}}>Done</button> */}
             <button onClick={props.onClose}>Close</button>
         </Modal>
     )

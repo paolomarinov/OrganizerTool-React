@@ -21,6 +21,13 @@ const CalendarView = (props) => {
   function closeModal(){
     setModalIsOpen(false)
   }
+
+  //Will add two functions, deleteEvent and eventDone
+  function deleteEvent(uniqueId){
+    localStorage.removeItem(`eventObj_${uniqueId}`)
+    props.updateEvents()
+    closeModal()
+  }
  
   return (
     <div style={{ height: '600px' }}>
@@ -31,9 +38,10 @@ const CalendarView = (props) => {
         endAccessor="end"
         style={{ height: '100%', width: '100%' }}
         onSelectEvent={handleEventClick}
+        updateEvents={props.updateEvents}
       />
 
-      {modalIsOpen && <EventDetailsModal isOpen={modalIsOpen} event={selectedEvent} onClose={closeModal}/>}
+      {modalIsOpen && <EventDetailsModal isOpen={modalIsOpen} event={selectedEvent} onClose={closeModal} deleteEvent={deleteEvent} onDone={eventDone}/>}
     </div>
   );
 };

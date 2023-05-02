@@ -33,7 +33,7 @@ const App = () => {
       <div className='app-container'>
         <InputZone events={events} onEventAdded={updateEvents} />
         <div className='calendar-container'>
-          <CalendarView events={events} />
+          <CalendarView events={events} updateEvents={updateEvents}/>
         </div>
       </div>
     </div>
